@@ -19,7 +19,7 @@
 
 		if($q->num_rows > 0){
 			if(password_verify($password, $a['password'])){
-				$sql = $con->query("INSERT INTO mdt_sessions VALUES(NULL, '{$sessionid}', '{$a['userid']}', '{$_SERVER['REMOTE_ADDR']}', " . time() .")");
+				$sql = $con->query("INSERT INTO mdt_sessions VALUES(NULL, '{$sessionid}', {$a['userid']}, '{$_SERVER['REMOTE_ADDR']}', " . time() .")");
 				$sql2 = $con->query("UPDATE mdt_users SET last_ip = '{$_SERVER['REMOTE_ADDR']}' WHERE userid = '{$a['userid']}'");
 				$q = $con->query("INSERT INTO logs VALUES (NULL, '{$a['userid']}', 'Has created a new session " . $_SERVER['REMOTE_ADDR'] . ".', 'Session', " . time() .", 1)");
 
